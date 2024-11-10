@@ -63,13 +63,13 @@ Percentage of duplicate files: 2.56%
 Total space occupied by unique files: 352872.07 MB
 Total space occupied by duplicates (could be freed): 15474.60 MB
 ```
-To scenario 1/3: Delete duplicates.
+To scenario 2/3: Delete duplicates.
 ```shell
 Statistics:
 Total duplicates deleted: 43
 Total space freed: 15474.60 MB
 ```
-To scenario 1/3: Delete duplicates.
+To scenario 3/3: Delete duplicates.
 ```shell
 Directory structure and file counts:
 /local/path/2023-11-12: 1 files
