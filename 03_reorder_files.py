@@ -2,7 +2,10 @@ import os
 import shutil
 
 # Calcular base_path
-base_path = os.path.join(os.path.expanduser("~"), "Documents", "multimedia")
+base_path = os.path.join(os.path.expanduser("~"), "Documents", "none", "multimedia/2023-10")
+
+# Configuración del criterio de ordenamiento (puede ser 'day' o 'month')
+criteria = 'day'  # Cambia a 'day' si deseas organizar por días
 
 # Variables para estadísticas
 total_files_found = 0
@@ -30,9 +33,8 @@ def get_creation_date_from_filename(filename):
         print(f"Error processing filename {filename}: {e}")
         return None
 
-
 # Función para mover los archivos a la carpeta correspondiente
-def move_files_by_creation_date():
+def move_files_by_creation_date(criteria='day'):
     global total_files_found, total_files_moved
 
     # Recorremos los archivos en el directorio base
@@ -51,9 +53,16 @@ def move_files_by_creation_date():
                     invalid_files.append(filepath)
                     continue
 
-                target_dir = os.path.join(base_path, creation_date)
+                # Crear el nombre de la carpeta en función del criterio
+                if criteria == 'day':
+                    target_dir = os.path.join(base_path, creation_date)  # Carpeta por día
+                elif criteria == 'month':
+                    target_dir = os.path.join(base_path, creation_date[:7])  # Carpeta por mes (YYYY-MM)
+                else:
+                    print("Criterio no válido. Use 'day' o 'month'.")
+                    return
 
-                # Crear la carpeta de la fecha si no existe
+                # Crear la carpeta si no existe
                 if not os.path.exists(target_dir):
                     os.makedirs(target_dir)
                     directories_created[target_dir] = 0  # Inicializamos el contador de archivos en la carpeta creada
@@ -67,17 +76,15 @@ def move_files_by_creation_date():
                         shutil.move(filepath, target_file)
                         total_files_moved += 1  # Contamos el archivo movido
                         directories_created[target_dir] += 1  # Incrementamos el contador de archivos en la carpeta
-                        print(f"Moved {file} to {target_file}")
+                        #print(f"Moved {file} to {target_file}")
                     except Exception as e:
                         print(f"Error moving {file}: {e}")
-
 
 # Función para mostrar la estadística del árbol de directorios
 def show_directory_statistics():
     print("\nDirectory structure and file counts:")
     for directory, count in directories_created.items():
         print(f"{directory}: {count} files")
-
 
 # Función para guardar los archivos no válidos en un archivo de texto
 def save_invalid_files():
@@ -90,8 +97,9 @@ def save_invalid_files():
         print("\nNo invalid files found.")
 
 
-# Llamar a la función para mover los archivos
-move_files_by_creation_date()
+
+# Llamar a la función para mover los archivos con el criterio elegido
+move_files_by_creation_date(criteria)
 
 # Mostrar estadísticas
 show_directory_statistics()

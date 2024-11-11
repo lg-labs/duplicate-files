@@ -2,7 +2,7 @@ import hashlib
 import os
 
 # Define base path using $HOME
-base_path = os.path.join(os.path.expanduser("~"), "Documents", "lg", "multimedia")
+base_path = os.path.join(os.path.expanduser("~"), "Documents", "none", "multimedia")
 print(f"Base path is: {base_path}")
 
 

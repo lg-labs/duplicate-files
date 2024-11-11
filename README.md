@@ -36,9 +36,9 @@ Step 2/2: Delete duplicates.
 make delete-duplicates
 ```
 
-## 🚀 Bonus: Order files by day
+## 🚀 Bonus: Order files by month or day
 
-The files ordered on set by day and generate folders with the following format `YYYY-MM-DD` as a result.
+The files ordered on set by day and generate folders with the following format `YYYY-MM` or `YYYY-MM-DD` as a result.
 
 ```shell
 make reorder-files
